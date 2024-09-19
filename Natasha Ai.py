@@ -7,6 +7,8 @@ import os
 import webbrowser
 import pyaudio
 import wave
+import pywhatkit as kit
+
 
 
 engine = pyttsx3.init('sapi5')
@@ -30,7 +32,7 @@ def wishMe():
         speak("Good Evening!")
 
 
-    #speak("I am  Natasha . created By JITENDRA SINGH BAGRI.  If you want to know the commands of what you can do.  speak.  natasha commands" )
+    speak("I am  Natasha . created By JITENDRA SINGH BAGRI.  If you want to know the commands of what you can do.  speak.  natasha commands" )
     #speak("I am Natasha")
 
     print("--- Show list for natasha commands ---")
@@ -336,43 +338,61 @@ if __name__ == "__main__":
             pyautogui.keyUp('alt')
 
 
+
         elif 'play online music' in query:
 
-            speak("ok sir wait 10 Seconds I play")
+            speak("ok sir. Which song you wants to play tell me name pleas")
 
-            webbrowser.open("www.youtube.com")
-            pyautogui.press('tab', interval=4)
-            pyautogui.press('tab', interval=0.05)
-            pyautogui.press('tab', interval=0.05)
-            pyautogui.press('tab', interval=0.05)
-            pyautogui.press('tab', interval=0.05)
-            def notepad():
-                speak("What song name sir")
-            def speech():
+
+            def speak(text):
+
+                print(text)
+
+
+            def get_song_name():
+
                 r = sr.Recognizer()
-                with sr.Microphone() as source:
-                    print('N_Listening...')
-                    r.pause_threshold = 2
-                    audio = r.listen(source)
-                    try:
-                        print('N_Recognizing...')
-                        query = r.recognize_google(audio, language='en-in')
-                        pyautogui.typewrite(query)
-                    except Exception as e:
-                        return 'none'
 
-                    return query
+                with sr.Microphone() as source:
+
+                    print('Listening...')
+
+                    audio = r.listen(source)
+
+                    try:
+
+                        song_name = r.recognize_google(audio, language='en-in')
+
+                        return song_name
+
+                    except sr.UnknownValueError:
+
+                        print("Sorry, I did not understand that.")
+
+                        return None
+
+                    except sr.RequestError:
+
+                        print("Sorry, there was a request error.")
+
+                        return None
+
 
             if __name__ == '__main__':
-                    notepad()
 
-                    speech()
-                    pyautogui.press('enter', interval=0.05)
-                    pyautogui.press('tab', interval=2)
-                    # pyautogui.press('tab', interval=0.05)
-                    # pyautogui.press('tab', interval=0.05)
-                    pyautogui.press('enter', interval=0.05)
+                song_name = get_song_name()
 
+                if song_name:
+
+                    kit.playonyt(song_name)
+
+                    speak(f"Playing {song_name} on YouTube.")
+
+                    continue
+
+                else:
+
+                    speak("Could not get the song name. Please try again.")
         elif 'skip the ad' in query:
 
             speak("ok sir.")
@@ -439,20 +459,11 @@ if __name__ == "__main__":
         elif 'volume and mute' in query:
             pyautogui.press("volumemute")
 
-
-
-
-
-
-
-
-
         elif 'exit' in query:
             speak("OK sir. Exiting this running Program")
             print("I am close")
             speak("I am Close")
             break
-
 
 
     else:
