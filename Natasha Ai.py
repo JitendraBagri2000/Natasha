@@ -9,14 +9,10 @@ import pyaudio
 import wave
 import pywhatkit as kit
 
-
-
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-#print(voices[1].id)
+
 engine.setProperty('voice', voices[1].id)
-
-
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
@@ -31,14 +27,8 @@ def wishMe():
     else:
         speak("Good Evening!")
 
-
     speak("I am  Natasha . created By JITENDRA SINGH BAGRI.  If you want to know the commands of what you can do.  speak.  natasha commands" )
-    #speak("I am Natasha")
-
     print("--- Show list for natasha commands ---")
-# Please tell me How may i help You Sir
-
-
 
 def takeCommand():
     r = sr.Recognizer()
@@ -53,16 +43,12 @@ def takeCommand():
         print(f"User said: {query}\n")
 
     except Exception as e:
-        # print(e)
         print("Say that again please...")
         return "None"
-
     return query
-
 
 if __name__ == "__main__":
     wishMe()
-    # if 1:
     while True:
         query = takeCommand().lower()
 
@@ -79,9 +65,7 @@ if __name__ == "__main__":
             speak("I am  Natasha . created By JITENDRA SINGH BAGRI."
                   "I am program with python language "
                   "I am computer assistant sir thank you. ")
-
 #------------------------------------------   List   -------------------------------------------------------
-
         elif 'commands'  in query:
             print('I am Natasha.\nCreated By Jitnedra Singh Bagri \n')
             print('  Commands          -         Commands Perform \n'
@@ -122,11 +106,9 @@ if __name__ == "__main__":
                   ' 34.volume unmute youtube     --> unmute the volume in youtube video.\n'
                   ' 35.exit                      --> Stop the program as (Natasha).\n'
                   )
-
             print("This are Natasha commands. you speak and use")
             speak("This are Natasha commands. you speak and use")
 # ----------------------------------------  Web Browser ------------------------------------------------
-
         elif 'open whatsapp' in query:
             webbrowser.open("web.whatsapp.com")
         elif 'open youtube' in query:
@@ -138,23 +120,15 @@ if __name__ == "__main__":
         elif 'open google' in query:
                  webbrowser.open("google.com")
 # ---------------------------------------- online web music's and video's ------------------------------------------------
-#         elif 'play online music' in query:
-#             print("Song name :-  Kabhi Jo Badal  Let Me Down ")
-#             speak("song name.  Let Me Down. Hindi mix")
-#             webbrowser.open("https://www.youtube.com/watch?v=vXnZW6DvBKo&list=RDlkdM0AgBzB0&index=2")
-
         elif 'play let me down' in query:
             print("Song name :-  Kabhi Jo Badal  Let Me Down ")
             speak("song name.  Let Me Down. Hindi mix")
             webbrowser.open("https://www.youtube.com/watch?v=vXnZW6DvBKo&list=RDlkdM0AgBzB0&index=2")
-
 # ---------------------------------------- Storeg media files  Music's and Video's ------------------------------------------------
         elif 'video list' in query:
                 speak("list all vidoe in your set menu")
                 print("1. Best Remixes of Popular Songs 2017")
-
 # ----------------------------------------  Time and date  ------------------------------------------------
-
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             print("Sir, the time is ", strTime)
@@ -172,23 +146,15 @@ if __name__ == "__main__":
             strDate = datetime.datetime.now().strftime("%d/%m/%Y")  #  %b
             print("Sir, the Date is ", strDate)
             speak(f' and  date is {strDate}')
-
 # ----------------------------------------  Computer apps opne ------------------------------------------------
-
         elif 'open discord' in query:
             codePath = "C:\\Users\\anupa\\AppData\\Local\\Discord\\app-1.0.9004\\Discord.exe"
             os.startfile(codePath)
-
 # ----------------------------------------  tasting ------------------------------------------------
         elif 'play song' in query:
             print(" Song name ")
             speak("Song name")
-            # webbrowser.open("https://www.youtube.com/watch?v=mfJhMfOPWdE")
-
-
 #----------------------------------Recording--------------------------------
-
-
         elif 'record' in query:
             speak("sir. You spack autometic record your voice ")
 
@@ -212,38 +178,23 @@ if __name__ == "__main__":
             sound_file.setsampwidth(audio.get_sample_size(pyaudio.paInt16))
             sound_file.setframerate(44100)
             sound_file.writeframes(b''.join(frames))
-
 # ------------------------type audio file--------------------------------------
-
         elif 'type audio file' in query:
-
-
             print("enter your path")
             speak("enter your file  path.")
             path = input()
             sound = (path)
-
             r = sr.Recognizer()
-
             with sr.AudioFile(sound) as source:
                 r.adjust_for_ambient_noise(source)
-
                 print("Converting Audio To Text ..... ")
-
                 audio = r.listen(source)
-
             try:
                 print("Converted Audio Is : \n" + r.recognize_google(audio))
-
                 speak("completed")
-
-
             except Exception as e:
                 print("Error {} : ".format(e))
-
 # ------------------------notepad--------------------------------------
-
-
         elif 'notepad' in query:
           def notepad():
              speak("you speak i am  type the Notepad")
@@ -259,51 +210,28 @@ if __name__ == "__main__":
                   print('N_Listening...')
                   r.pause_threshold = 1
                   audio = r.listen(source)
-
                   try:
-
                       print('N_Recognizing...')
                       query = r.recognize_google(audio, language='en-in')
                       pyautogui.typewrite(query)
                   except Exception as e:
-
                       print('say again')
                       return 'none'
-
                   return query
-
           if __name__ == '__main__':
               notepad()
               while True:
                   speech()
-
 # ------------------------Shut down my computer and Restart--------------------------------------
         elif 'shut down my computer' in query:
             speak("OK sir. Your Computer Power Off and i am close")
             os.system("shutdown /s /t 1")
             break
-            # shutdown = input("Your Computer Power Off? (yes/no)")
-            # if shutdown =="yes":
-            #
-            # elif shutdown == "no":
-
-
-            # pyautogui.keyDown('win')
-            # pyautogui.press('x')
-            # pyautogui.keyUp('win')
-            # pyautogui.press('u', interval=0.10)
-            # speak("and I am Close")
-            # pyautogui.press('u', interval=0.20)
-
-
-
         elif 'restart my computer' in query:
             speak("OK sir. restart now and i am close")
             os.system("shutdown /r /t 1")
             break
-
         elif 'logout my computer' in query:
-
             speak("ok sir.")
             pyautogui.keyDown('win')
             pyautogui.press('x', interval=0.03)
@@ -311,23 +239,14 @@ if __name__ == "__main__":
             pyautogui.press('u', interval=0.03)
             pyautogui.press('i', interval=0.03)
             break
-
         elif 'open settings' in query:
             speak("OK sir.")
             pyautogui.keyDown('win')
             pyautogui.press('x')
             pyautogui.keyUp('win')
             pyautogui.press('n', interval=0.10)
-
         elif 'lock screen' in query:
             speak("Sorry sir. This commands is working please use another")
-            # pyautogui.keyDown('win')
-            # pyautogui.press('l')
-            # pyautogui.keyUp('win')
-         #   print("I am close")
-         #   speak("I am Close")
-
-
         elif 'close background windows' in query:
             speak("OK sir.")
             pyautogui.keyDown('alt')
@@ -336,62 +255,33 @@ if __name__ == "__main__":
             pyautogui.keyDown('alt')
             pyautogui.press('f4', interval=0.10)
             pyautogui.keyUp('alt')
-
-
-
+            
         elif 'play online music' in query:
-
             speak("ok sir. Which song you wants to play tell me name pleas")
-
-
+            
             def speak(text):
-
                 print(text)
-
-
             def get_song_name():
-
                 r = sr.Recognizer()
-
                 with sr.Microphone() as source:
-
                     print('Listening...')
-
                     audio = r.listen(source)
-
                     try:
-
                         song_name = r.recognize_google(audio, language='en-in')
-
                         return song_name
-
                     except sr.UnknownValueError:
-
                         print("Sorry, I did not understand that.")
-
                         return None
-
                     except sr.RequestError:
-
                         print("Sorry, there was a request error.")
-
                         return None
-
-
             if __name__ == '__main__':
-
                 song_name = get_song_name()
-
                 if song_name:
-
                     kit.playonyt(song_name)
-
                     speak(f"Playing {song_name} on YouTube.")
-
                     continue
-
                 else:
-
                     speak("Could not get the song name. Please try again.")
         elif 'skip the ad' in query:
 
